@@ -6,6 +6,8 @@ KnockdEfault Evaluator - Testing the Perimeter for Default Port Knock Cloaking
 
 Thanks to the developers of Python-libnmap
 
+Proof of concept on my blog - http://www.shortbus.ninja/?p=47 
+
 ## About
 
 This is a simple tool used to determine if a list of remote servers are cloaking any service(s) with the default knockd port knock sequence. 

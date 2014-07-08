@@ -7,45 +7,30 @@ from libnmap.parser import NmapParser
 import sys
 import time
 
-if len(sys.argv) != 4:
+if len(sys.argv) != 3:
 	print "\n\n          *** Knockd Evaluator ***          "
 	print "To test systems for default knockd configuration\n"
-	print "Usage - ./knockd_eval.py [Input File] [Output File] [Mode]"
+	print "Usage - ./knockd_eval.py [Input File] [Output File]"
 	print "----------"
-	print "\nModes:\n1) Test SSH Only\n2) Test all Services\n"
-	print "Example - ./knockd_eval.py iplist.txt 2"
-	print "Example will test default knockd sequence to identify opened services for all ports on systems listed in input file"
+	print "Example - ./knockd_eval.py iplist.txt outfile.txt"
+	print "Example will test default knockd sequence to identify opened services for all ports on systems listed in input file, and output results in outfile.txt"
 	print "----------\n"
 	sys.exit()
 
-def knockd_test(ip,outfile,start_key,stop_key,mode):
+def knockd_test(ip,outfile,start_key,stop_key):
 	## Baseline Nmap Scan
 	print "\n[-] Scanning " + ip + " with Nmap, this could take a minute...go get some coffee"
-        if str(mode) == '1':
-		nm = NmapProcess(ip, options="-p 22")
-		rc = nm.run()
-		if nm.rc == 0:
-			before = NmapParser.parse(nm.stdout)
-			before_ports = before.hosts[0].get_ports()
-		else:
-			print nm.stderr
-			sys.exit()
-	elif str(mode) == '2':
-		nm = NmapProcess(ip, options="-p 0-65535")
-                rc = nm.run()
-                if nm.rc == 0:
-                        before = NmapParser.parse(nm.stdout)
-                        before_ports = before.hosts[0].get_ports()
-                else:
-                        print nm.stderr
-                        sys.exit()
-	else:
-		print "\n[-] An error has occured"
-		sys.exit()
+	nm = NmapProcess(ip, options="-p 0-65535")
+        rc = nm.run()
+        if nm.rc == 0:
+        	before = NmapParser.parse(nm.stdout)
+        	before_ports = before.hosts[0].get_ports()
+        else:
+        	print nm.stderr
+        	sys.exit()
 
 	## Sending Default Knockd Port Knock Sequence with Scapy
         print "\n[-] Sending default knockd sequence to " + ip
-        time.sleep(2)
 	for x in start_key:
                 send(IP(dst=ip)/TCP(dport=x),verbose=0)
 
@@ -89,8 +74,7 @@ stop_key = (9000,8000,7000)
 ## Arguments supplied
 ip_list = sys.argv[1]
 outfile = sys.argv[2]
-mode = sys.argv[3]
 
 ## Execution of function
 for ip in open(ip_list).readlines():
-	knockd_test(ip.strip(),outfile,start_key,stop_key,mode)
+	knockd_test(ip.strip(),outfile,start_key,stop_key)

@@ -5,6 +5,7 @@ from libnmap.process import NmapProcess
 from libnmap.process import NmapProcess
 from libnmap.parser import NmapParser
 import sys
+import time
 
 if len(sys.argv) != 4:
 	print "\n\n          *** Knockd Evaluator ***          "
@@ -44,7 +45,8 @@ def knockd_test(ip,outfile,start_key,stop_key,mode):
 
 	## Sending Default Knockd Port Knock Sequence with Scapy
         print "\n[-] Sending default knockd sequence to " + ip
-        for x in start_key:
+        time.sleep(2)
+	for x in start_key:
                 send(IP(dst=ip)/TCP(dport=x),verbose=0)
 
 	## Subsequent Nmap Scan

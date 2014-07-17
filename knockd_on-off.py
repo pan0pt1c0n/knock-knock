@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+import logging
+logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
 from scapy.all import *
 import sys
 

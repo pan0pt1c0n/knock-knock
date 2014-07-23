@@ -6,7 +6,7 @@ KnockdEfault Evaluator - Testing the Perimeter for Default Port Knock Cloaking
 
 Thanks to the developers of Python-libnmap
 
-Proof of concept on my blog - http://www.shortbus.ninja/?p=47 
+Proof of concept on my blog - http://www.shortbus.ninja/default-knockd-cloaking-configurations/
 
 ## About
 

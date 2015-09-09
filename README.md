@@ -1,12 +1,12 @@
 # KnockdEfault Evaluator v1.1
 
-Author: Justin Hutchens (H@ck1tHu7ch)
+Author: Justin Hutchens (Pan0pt1c0n)
 
 KnockdEfault Evaluator - Testing the Perimeter for Default Port Knock Cloaking
 
 Thanks to the developers of Python-libnmap
 
-Proof of concept on my blog - http://www.shortbus.ninja/default-knockd-cloaking-configurations/
+Proof of concept on my blog - http://www.pan0pt1c0n.net/default-knockd-cloaking-configurations/
 
 ## About
 
